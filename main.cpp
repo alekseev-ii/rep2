@@ -2,6 +2,7 @@
 #include <cstddef>
 
 #include "point.h"
+#include "vector.h"
 
 
 Planar * most_left(Planar ** pls, size_t k);
@@ -41,6 +42,9 @@ Planar * make(size_t id)
   switch (id) {
     case 0:
       result = new Point(0, 0);
+      break;
+    case 1:
+      result = new Vector(Point(0, 0), Point(1, 1));
       break;
     default: throw std::logic_error("bad id");
   }

@@ -1,6 +1,11 @@
 #include "vector.h"
 
 
+Vector::Vector(Point aa, Point bb): Planar(), a(aa), b(bb)
+{
+}
+
+
 int Vector::x() const
 {
   return b.x() - a.x();
