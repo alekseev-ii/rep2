@@ -11,8 +11,17 @@ struct Planar {
 };
 
 
-Planar * make(std::istream & input);
+struct Point : Planar {
+  int x, y;
+
+};
+
+
 Planar * most_left(Planar ** pls, size_t k);
+Planar * make(std::istream & input);
+Planar * make(size_t pl);
+void draw(Planar * p);
+void free_planars(Planar ** pls, size_t k);
 
 
 #endif
