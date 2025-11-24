@@ -20,7 +20,7 @@ struct Point : Planar {
 Planar * most_left(Planar ** pls, size_t k);
 Planar * make(std::istream & input);
 Planar * make(size_t pl);
-void draw(Planar * p);
+void draw(Planar * pl);
 void free_planars(Planar ** pls, size_t k);
 
 
