@@ -1,18 +1,45 @@
 #include "planars.h"
 
 
+Point::Point(int xx, int yy): Planar(), data{xx, yy}
+{
+}
+
+
+int Point::x() const
+{
+  return data[0];
+}
+
+
+int Point::y() const
+{
+  return data[1];
+}
+
+
+int Point::abs_sqr() const
+{
+  return x() * x() + y() * y();
+}
+
+
 Planar * most_left(Planar ** pls, size_t k)
 {
   return nullptr;
 }
 
 
-Planar * make(size_t pl)
+Planar * make(size_t id)
 {
-  switch (pl) {
-    default: throw std::logic_error("bad pl");
+  Planar * result = nullptr;
+  switch (id) {
+    case 0:
+      result = new Point(0, 0);
+      break;
+    default: throw std::logic_error("bad id");
   }
-  return nullptr;
+  return result;
 }
 
 
@@ -28,5 +55,3 @@ void free_planars(Planar ** pls, size_t k)
     delete pls[i];
   }
 }
-
-
