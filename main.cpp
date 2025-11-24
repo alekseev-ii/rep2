@@ -32,7 +32,13 @@ int main()
 
 Planar * most_left(Planar ** pls, size_t k)
 {
-  return nullptr;
+  Planar * left = pls[0];
+  for (size_t i = 1; i < k; ++i) {
+    if (pls[i]->x() < left->x()) {
+      left = pls[i];
+    }
+  }
+  return left;
 }
 
 

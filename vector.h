@@ -7,7 +7,7 @@
 
 struct Vector: Planar {
   Vector(Point aa, Point bb);
-  virtual ~Vector();
+  virtual ~Vector() = default;
 
   virtual int x() const;
   virtual int y() const;
