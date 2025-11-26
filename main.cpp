@@ -45,7 +45,16 @@ int main()
     return 3;
   }
 
-  draw(*most_left(pls, size));
+  Planar ** ml = most_left(pls, size);
+
+  if (ml == pls + size) {
+    std::cout << "Not found";
+    free_planars(pls, size);
+    delete[] pls;
+    return 0;
+  }
+
+  draw(*ml);
 
   free_planars(pls, size);
   delete[] pls;
