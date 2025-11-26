@@ -5,7 +5,7 @@
 #include "vector.h"
 
 
-Planar * most_left(Planar ** pls, size_t k);
+Planar ** most_left(Planar ** pls, size_t k);
 Planar * make(std::istream & input);
 Planar * make(size_t id);
 void draw(Planar * pl);
@@ -45,22 +45,27 @@ int main()
     return 3;
   }
 
-  draw(most_left(pls, size));
+  draw(*most_left(pls, size));
 
   free_planars(pls, size);
   delete[] pls;
 }
 
 
-Planar * most_left(Planar ** pls, size_t k)
+Planar ** most_left(Planar ** pls, size_t k)
 {
-  Planar * left = pls[0];
-  for (size_t i = 1; i < k; ++i) {
-    if (pls[i]->x() < left->x()) {
-      left = pls[i];
+  if (!k) {
+    return pls;
+  }
+  Planar ** result = pls;
+  while (--k) {
+    int next_x = (*(++pls))->x();
+    int current_x = (*(++pls))->x();
+    if (next_x < current_x) {
+      result = pls;
     }
   }
-  return left;
+  return result;
 }
 
 
