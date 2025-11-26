@@ -14,19 +14,41 @@ void free_planars(Planar ** pls, size_t k);
 
 int main()
 {
-  Planar * pls[10] = {};
-  size_t k = 0;
-  for (size_t i = 0; i < 10; ++i) {
+  size_t size = 0;
+  size_t capacity = 20;
+  Planar ** pls = new Planar *[capacity];
+
+  while (std::cin) {
+    Planar * pl = nullptr;
     try {
-      pls[k] = make(i % 2);
+      pl = make(std::cin); // bad_alloc || logic_error
+      if (size == capacity) {
+        Planar ** ext_pls = new Planar *[capacity * 2]; // bad_alloc
+        for (size_t i = 0; i < size; ++i) {
+          ext_pls[i] = pls[i];
+        }
+        delete[] pls;
+        pls = ext_pls;
+        capacity *= 2;
+      }
+      pls[size++] = pl;
     } catch (...) {
-      free_planars(pls, k);
+      delete pl;
+      free_planars(pls, size);
+      delete[] pls;
       return 2;
     }
-    k++;
   }
-  draw(most_left(pls, k));
-  free_planars(pls, k);
+  if (!std::cin.eof()) {
+    free_planars(pls, size);
+    delete[] pls;
+    return 3;
+  }
+
+  draw(most_left(pls, size));
+
+  free_planars(pls, size);
+  delete[] pls;
 }
 
 
@@ -39,6 +61,24 @@ Planar * most_left(Planar ** pls, size_t k)
     }
   }
   return left;
+}
+
+
+Planar * make(std::istream & input)
+{
+  char cmd[2] = {};
+  input >> cmd[0] >> cmd[1];
+  int data[4]{0};
+  if (cmd[0] == 'P' && cmd[1] == 'T') {
+    if (input >> data[0] >> data[1]) {
+      return new Point(data[0], data[1]);
+    }
+  } else if (cmd[0] == 'V' && cmd[1] == 'T') {
+    if (input >> data[0] >> data[1] >> data[2] >> data[3]) {
+      return new Vector(Point(data[0], data[1]), Point(data[2], data[3]));
+    }
+  }
+  throw std::logic_error("bad cmd");
 }
 
 
