@@ -1,9 +1,11 @@
 #ifndef PLANAR_H
 #define PLANAR_H
 
+struct p_t {
+  int x, y;
+};
 struct frame_t {
-  int x1, y1;
-  int x2, y2;
+  p_t AA, BB;
 };
 
 

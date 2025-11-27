@@ -33,7 +33,6 @@ int main()
         capacity *= 2;
       }
       pls[size++] = pl;
-      draw(pl);
     } catch (...) {
       delete pl;
       free_planars(pls, size);
@@ -71,7 +70,7 @@ Planar ** most_left(Planar ** pls, size_t k)
   Planar ** result = pls;
   while (--k) {
     int next_x = (*(++pls))->x();
-    int current_x = (*(++pls))->x();
+    int current_x = (*(result))->x();
     if (next_x < current_x) {
       result = pls;
     }
@@ -82,7 +81,7 @@ Planar ** most_left(Planar ** pls, size_t k)
 
 Planar * make(std::istream & input)
 {
-  char cmd[2] = {};
+  char cmd[3] = {0};
   input >> cmd[0] >> cmd[1];
   int data[6]{0};
   if (cmd[0] == 'P' && cmd[1] == 'T') {
@@ -126,7 +125,7 @@ void draw(Planar * pl)
 {
   std::cout << pl->x() << " " << pl->y() << " " << pl->area() << "\n";
   frame_t fr = pl->frame();
-  std::cout << fr.x1 << " " << fr.y1 << "    " << fr.x2 << " " << fr.y2 << "\n";
+  std::cout << fr.AA.x << " " << fr.AA.y << "    " << fr.BB.x << " " << fr.BB.y << "\n";
 }
 
 

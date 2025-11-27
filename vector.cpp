@@ -31,5 +31,5 @@ double Vector::area() const
 
 frame_t Vector::frame() const
 {
-  return frame_t{a.x(), a.y(), b.x(), b.y()};
+  return frame_t{p_t{a.x(), a.y()}, p_t{b.x(), b.y()}};
 }

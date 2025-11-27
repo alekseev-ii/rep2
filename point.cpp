@@ -32,5 +32,5 @@ double Point::area() const
 
 frame_t Point::frame() const
 {
-  return frame_t{0, 0, x(), y()};
+  return frame_t{p_t{0, 0}, p_t{x(), y()}};
 }

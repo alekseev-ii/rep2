@@ -32,7 +32,7 @@ int Triangle::abs_sqr() const
 double Triangle::area() const
 {
   return (a().x() * (b().y() - c().y()) +
-          b().x() * (c().y() - a().y()) + c().x() * (a().y() - b().y())) / 2;
+    b().x() * (c().y() - a().y()) + c().x() * (a().y() - b().y())) / 2;
 }
 
 
@@ -41,7 +41,7 @@ frame_t Triangle::frame() const
   int min_x = data[0].x();
   int min_y = data[0].y();
   int max_x = data[0].x();
-  int max_y = data[0].x();
+  int max_y = data[0].y();
   for (int i = 1; i < 3; ++i) {
     if (data[i].x() < min_x) {
       min_x = data[i].x();
@@ -56,6 +56,7 @@ frame_t Triangle::frame() const
       max_y = data[i].y();
     }
   }
+  return frame_t{p_t{min_x, min_y}, p_t{max_x, max_y}};
 }
 
 
