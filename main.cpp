@@ -7,6 +7,7 @@
 
 
 Planar ** most_left(Planar ** pls, size_t k);
+Planar ** max_area(Planar ** pls, size_t k);
 Planar * make(std::istream & input);
 Planar * make(size_t id);
 void draw(Planar * pl);
@@ -72,6 +73,23 @@ Planar ** most_left(Planar ** pls, size_t k)
     int next_x = (*(++pls))->x();
     int current_x = (*(result))->x();
     if (next_x < current_x) {
+      result = pls;
+    }
+  }
+  return result;
+}
+
+
+Planar ** max_area(Planar ** pls, size_t k)
+{
+  if (!k) {
+    return pls;
+  }
+  Planar ** result = pls;
+  while (--k) {
+    int next_area = (*(++pls))->area();
+    int current_area = (*(result))->area();
+    if (next_area > current_area) {
       result = pls;
     }
   }
