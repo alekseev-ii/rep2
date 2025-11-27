@@ -1,6 +1,16 @@
 #include "quadrangle.h"
 
 #include "cstddef"
+#include <stdexcept>
+
+
+Quadrangle::Quadrangle(Point aa, Point bb, Point cc, Point dd): Planar(),
+                                                                data{aa, bb, cc, dd}
+{
+  if (!area_abc() || !area_dbc()) {
+    throw std::logic_error("bad quadrangle");
+  }
+}
 
 
 int Quadrangle::x() const
@@ -23,11 +33,7 @@ int Quadrangle::abs_sqr() const
 
 double Quadrangle::get_area() const
 {
-  double area1 = (a().x() * (b().y() - c().y()) +
-                  b().x() * (c().y() - a().y()) + c().x() * (a().y() - b().y())) / 2;
-  double area2 = (d().x() * (b().y() - c().y()) +
-                  b().x() * (c().y() - d().y()) + c().x() * (d().y() - b().y())) / 2;
-  return area1 + area2;
+  return area_abc() + area_dbc();
 }
 
 
@@ -88,4 +94,18 @@ Point Quadrangle::c() const
 Point Quadrangle::d() const
 {
   return data[3];
+}
+
+
+double Quadrangle::area_abc() const
+{
+  return (a().x() * (b().y() - c().y()) +
+          b().x() * (c().y() - a().y()) + c().x() * (a().y() - b().y())) / 2;
+}
+
+
+double Quadrangle::area_dbc() const
+{
+  return (d().x() * (b().y() - c().y()) +
+          b().x() * (c().y() - d().y()) + c().x() * (d().y() - b().y())) / 2;
 }

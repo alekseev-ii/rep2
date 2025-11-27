@@ -6,7 +6,7 @@
 
 struct Quadrangle: Planar {
   Quadrangle(Point aa, Point bb, Point cc, Point dd);
-  ~Quadrangle();
+  ~Quadrangle() = default;
 
   virtual int x() const;
   virtual int y() const;
@@ -21,6 +21,8 @@ struct Quadrangle: Planar {
 
   private:
     Point data[4];
+    double area_abc() const;
+    double area_dbc() const;
 };
 
 
