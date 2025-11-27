@@ -32,6 +32,7 @@ int main()
         capacity *= 2;
       }
       pls[size++] = pl;
+      draw(pl);
     } catch (...) {
       delete pl;
       free_planars(pls, size);
@@ -114,8 +115,8 @@ Planar * make(size_t id)
 
 void draw(Planar * pl)
 {
-  std::cout << pl->x() << " " << pl->y() << " " << pl->get_area();
-  frame_t fr = pl->get_frame();
+  std::cout << pl->x() << " " << pl->y() << " " << pl->area() << "\n";
+  frame_t fr = pl->frame();
   std::cout << fr.x1 << " " << fr.y1 << "    " << fr.x2 << " " << fr.y2 << "\n";
 }
 

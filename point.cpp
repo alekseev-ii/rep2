@@ -24,13 +24,13 @@ int Point::abs_sqr() const
 }
 
 
-double Point::get_area() const
+double Point::area() const
 {
   return 0;
 }
 
 
-frame_t Point::get_frame() const
+frame_t Point::frame() const
 {
   return frame_t{0, 0, x(), y()};
 }
