@@ -2,6 +2,7 @@
 #include <cstddef>
 
 #include "point.h"
+#include "triangle.h"
 #include "vector.h"
 
 
@@ -83,7 +84,7 @@ Planar * make(std::istream & input)
 {
   char cmd[2] = {};
   input >> cmd[0] >> cmd[1];
-  int data[4]{0};
+  int data[6]{0};
   if (cmd[0] == 'P' && cmd[1] == 'T') {
     if (input >> data[0] >> data[1]) {
       return new Point(data[0], data[1]);
@@ -91,6 +92,11 @@ Planar * make(std::istream & input)
   } else if (cmd[0] == 'V' && cmd[1] == 'T') {
     if (input >> data[0] >> data[1] >> data[2] >> data[3]) {
       return new Vector(Point(data[0], data[1]), Point(data[2], data[3]));
+    }
+  } else if (cmd[0] == 'T' && cmd[1] == 'T') {
+    if (input >> data[0] >> data[1] >> data[2] >> data[3] >> data[4] >> data[5]) {
+      return new Triangle(Point(data[0], data[1]), Point(data[2], data[3]),
+      Point(data[4], data[5]));
     }
   }
   throw std::logic_error("bad cmd");
@@ -106,6 +112,9 @@ Planar * make(size_t id)
       break;
     case 1:
       result = new Vector(Point(0, 0), Point(1, 1));
+      break;
+    case 2:
+      result = new Triangle(Point(0, 0), Point(1, 1), Point(0, 1));
       break;
     default: throw std::logic_error("bad id");
   }

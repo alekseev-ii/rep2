@@ -23,6 +23,12 @@ int Triangle::y() const
 }
 
 
+int Triangle::abs_sqr() const
+{
+  return first().abs_sqr();
+}
+
+
 double Triangle::area() const
 {
   return (a().x() * (b().y() - c().y()) +

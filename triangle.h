@@ -10,6 +10,7 @@ struct Triangle: Planar {
 
   virtual int x() const;
   virtual int y() const;
+  virtual int abs_sqr() const;
   virtual double area() const;
   virtual frame_t frame() const;
   Point first() const;
