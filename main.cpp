@@ -114,7 +114,9 @@ Planar * make(size_t id)
 
 void draw(Planar * pl)
 {
-  std::cout << pl->x() << " " << pl->y() << "\n";
+  std::cout << pl->x() << " " << pl->y() << " " << pl->get_area();
+  frame_t fr = pl->get_frame();
+  std::cout << fr.x1 << " " << fr.y1 << "    " << fr.x2 << " " << fr.y2 << "\n";
 }
 
 
