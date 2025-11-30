@@ -31,5 +31,9 @@ double Vector::area() const
 
 frame_t Vector::frame() const
 {
-  return frame_t{p_t{a.x(), a.y()}, p_t{b.x(), b.y()}};
+  int min_x = a.x() < b.x() ? a.x() : b.x();
+  int min_y = a.y() < b.y() ? a.y() : b.y();
+  int max_x = a.x() > b.x() ? a.x() : b.x();
+  int max_y = a.y() > b.y() ? a.y() : b.y();
+  return frame_t{p_t{min_x, min_y}, p_t{max_x, max_y}};
 }

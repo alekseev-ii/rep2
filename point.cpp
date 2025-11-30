@@ -32,5 +32,9 @@ double Point::area() const
 
 frame_t Point::frame() const
 {
-  return frame_t{p_t{0, 0}, p_t{x(), y()}};
+  int min_x = x() < 0 ? x() : 0;
+  int min_y = y() < 0 ? y() : 0;
+  int max_x = x() > 0 ? x() : 0;
+  int max_y = y() > 0 ? y() : 0;
+  return frame_t{p_t{min_x, min_y}, p_t{max_x, max_y}};
 }
