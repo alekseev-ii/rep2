@@ -49,19 +49,22 @@ int main()
     return 3;
   }
 
-  Planar ** ml = most_left(pls, size);
-
-  if (ml == pls + size) {
-    std::cout << "Not found";
+  if (size == 0) {
     free_planars(pls, size);
     delete[] pls;
-    return 0;
+    return 4;
   }
 
-  draw(*ml);
+  Planar * max_area_planar = *max_area(pls, size);
+  draw(max_area_planar);
+  Planar *** max_intersection = max_frame_intersections(pls, size);
+  draw(*max_intersection[0]);
+  draw(*max_intersection[1]);
+
 
   free_planars(pls, size);
   delete[] pls;
+  delete[] max_intersection;
 }
 
 
