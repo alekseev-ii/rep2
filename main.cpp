@@ -9,7 +9,7 @@
 Planar ** most_left(Planar ** pls, size_t k);
 Planar ** max_area(Planar ** pls, size_t k);
 size_t intersection_of_frames_area(frame_t f1, frame_t f2);
-void max_frame_intersections(Planar ** pls, size_t k);
+Planar *** max_frame_intersections(Planar ** pls, size_t k);
 Planar * make(std::istream & input);
 Planar * make(size_t id);
 void draw(Planar * pl);
@@ -114,29 +114,30 @@ size_t intersection_of_frames_area(frame_t f1, frame_t f2)
 }
 
 
-void max_frame_intersections(Planar ** pls, size_t k)
+Planar ***  max_frame_intersections(Planar ** pls, size_t k)
 {
+  Planar *** result = new Planar **[2];
   if (k < 2) {
-    throw std::invalid_argument("Not enough planars");
+    result[0] = result[1] = pls;
+    return result;
   }
-  Planar ** p1 = pls;
-  Planar ** p2 = pls + 1;
+  result[0] = pls;
+  result[1] = pls + 1;
   size_t max_intersections = intersection_of_frames_area(pls[0]->frame(), pls[1]->frame());
   for (size_t i = 0; i < k - 1; ++i) {
     for (size_t j = i + 1; j < k; ++j) {
       size_t intersection = intersection_of_frames_area(pls[i]->frame(), pls[j]->frame());
       if (intersection > max_intersections) {
         max_intersections = intersection;
-        p1 = pls + i;
-        p2 = pls + j;
+        result[0] = pls + i;
+        result[1] = pls + j;
       }
     }
   }
   if (max_intersections == 0) {
-    p1 = p2 = pls + k;
+    result[0] = result[1] = pls + k;
   }
-  draw(*p1);
-  draw(*p2);
+  return result;
 }
 
 
